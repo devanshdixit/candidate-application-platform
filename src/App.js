@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux';
+import { Container, Box } from '@mui/material';
+import store from './store/store';
+import JobList from './components/JobList';
+import Filters from './components/Filters';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Container>
+        <Box sx={{ marginTop: 4 }}>
+          <Filters />
+          <JobList />
+        </Box>
+      </Container>
+    </Provider>
   );
-}
+};
 
 export default App;
