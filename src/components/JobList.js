@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Grid } from '@mui/material';
 import JobCard from './JobCard';
 import { fetchJobs } from '../actions/jobActions';
+import './JobList.css';
 
 const JobList = () => {
   const dispatch = useDispatch();
@@ -31,20 +32,11 @@ const JobList = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <Grid container spacing={2}>
-      {jobs.map((job, index) => (
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={4}
-          key={job.id}
-          ref={jobs.length === index + 1 ? lastJobElementRef : null}
-        >
-          <JobCard job={job} />
-        </Grid>
+    <div className="job-list">
+      {jobs.map((job) => (
+        <JobCard key={job.jdUid} job={job} />
       ))}
-    </Grid>
+    </div>
   );
 };
 

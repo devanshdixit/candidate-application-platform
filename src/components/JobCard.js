@@ -1,7 +1,8 @@
 import React from 'react';
 import { Card, CardContent, Typography, Button, Box, Avatar } from '@mui/material';
 import styled from '@emotion/styled';
-
+import './JobCard.css';
+import user from '../utils/user.png';
 const StyledCard = styled(Card)`
   margin-bottom: 16px;
 `;
@@ -30,29 +31,42 @@ const JobCard = ({ job }) => {
   } = job;
 
   return (
-    <StyledCard>
-      <CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
-          <Avatar src={getDefault(logoUrl, '')} sx={{ marginRight: 2 }} />
-          <Typography variant="h5">{getDefault(companyName,"N/A")}</Typography>
-        </Box>
-        <Typography variant="subtitle1" gutterBottom>{getDefault(jobRole,"N/A")}</Typography>
-        <Typography variant="body2" gutterBottom>{getDefault(location, 'N/A')}</Typography>
-        <Typography variant="body2" gutterBottom>
-          {getDefault(jobDetailsFromCompany)}
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          Minimum Experience: {getDefault(minExp)} years
-        </Typography>
-        <Typography variant="body2" gutterBottom>
-          Salary: {getDefault(salaryCurrencyCode)} {getDefault(minJdSalary)} - {getDefault(maxJdSalary)}
-        </Typography>
-        <ButtonBox>
-          <Button variant="contained" color="primary" href={getDefault(jdLink, '#')}>View Job</Button>
-          <Button variant="outlined" href={getDefault(jdLink, '#')}>Unlock referral asks</Button>
-        </ButtonBox>
-      </CardContent>
-    </StyledCard>
+    <div className="job-card">
+      <div className="job-card-header">
+        <img src={logoUrl} alt={`${companyName} logo`} />
+        <div>
+          <h2>{companyName}</h2>
+          <h1>{jobRole}</h1>
+          <p>{location}</p>
+        </div>
+      </div>
+      <div className="job-card-salary">
+        <p>Estimated Salary:</p>
+        <p>
+          {salaryCurrencyCode} {minJdSalary} - {maxJdSalary} LPA ✅
+        </p>
+      </div>
+      <p className='job-card-p'>About Company:</p>
+      <p className='job-card-p'>About us</p>
+      <div className='job-card-section'>
+        <p className="job-card-description">{jobDetailsFromCompany}</p>
+        <div>
+          <a href={jdLink} target="_blank" rel="noopener noreferrer">View job</a>
+        </div>
+      </div>
+      <div className="job-card-experience">
+        <p>Minimum Experience:</p>
+        <p>{minExp} years</p>
+      </div>
+      <div className="job-card-actions">
+        <button className='job-card-actions-button'>⚡️ Easy Apply</button>
+        <button className='job-card-actions-button-referral job-card-actions-button'>
+          <img src={user} alt='' className='job-card-actions-button-user' />
+          <img src={user} alt='' className='job-card-actions-button-user' />
+          Unlock referral asks
+        </button>
+      </div>
+    </div>
   );
 };
 
